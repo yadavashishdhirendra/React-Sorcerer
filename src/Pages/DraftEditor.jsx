@@ -1,6 +1,8 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Editor, EditorState, RichUtils, convertToRaw, convertFromRaw, Modifier } from 'draft-js';
 import 'draft-js/dist/Draft.css';
+import Alerts from '../Components/Alerts/Alerts';
+import useAlert from '../Components/Alerts/CustomAlert';
 
 const style_Map = {
     RED: {
@@ -10,6 +12,8 @@ const style_Map = {
 
 const DraftEditor = () => {
     const [editor, setEditor] = useState(EditorState.createEmpty());
+
+    const [alert, showAlert] = useAlert();
 
     useEffect(() => {
         const editor__sorcerer = localStorage.getItem('sorcerer');
@@ -122,7 +126,14 @@ const DraftEditor = () => {
     // Here Save Editor Content to localStorage
     const handleSave = () => {
         const content = editor.getCurrentContent();
+
+        if (!content.hasText()) {
+            showAlert("Please Enter Some Text in Editor", 'danger');
+            return;
+        }
+
         localStorage.setItem('sorcerer', JSON.stringify(convertToRaw(content)));
+        showAlert("Data Stored Success", 'success')
     };
 
 
@@ -130,6 +141,9 @@ const DraftEditor = () => {
     return (
         <Fragment>
             <div className="container">
+                {
+                    alert.display && <Alerts message={alert.message} prompt={alert.type} />
+                }
                 {/* Header component starts here */}
                 <div className='d-flex flex-row align-items-center justify-content-between mt-3 mb-3'>
                     <h1>My Editor</h1>

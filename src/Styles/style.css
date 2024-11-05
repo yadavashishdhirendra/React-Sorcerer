@@ -16,3 +16,7 @@ h1 {
 button {
     border-radius: 2px !important;
 }
+
+.alert{
+    font-weight: 600;
+}
