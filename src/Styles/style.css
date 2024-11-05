@@ -1,0 +1,18 @@
+.editor__container {
+    border: 2px solid #f7f7f7;
+    min-height: 300px;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.editor__container>div>div {
+    height: 300px !important;
+}
+
+h1 {
+    font-weight: 600;
+}
+
+button {
+    border-radius: 2px !important;
+}
