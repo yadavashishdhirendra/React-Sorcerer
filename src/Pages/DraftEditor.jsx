@@ -168,6 +168,7 @@ const DraftEditor = () => {
 
                 <div className='editor__container'>
                     <Editor
+                        placeholder="Enter Some Text '#' For Heading, '*' For Bold, '**' For Red Color, '***' For Underline...."
                         editorState={editor}
                         handleBeforeInput={handleBeforeInput}
                         customStyleMap={style_Map}
