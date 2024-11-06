@@ -133,10 +133,22 @@ const DraftEditor = () => {
         }
 
         localStorage.setItem('sorcerer', JSON.stringify(convertToRaw(content)));
-        showAlert("Data Stored Success", 'success')
+        showAlert("Data Stored Successfully!", 'success')
     };
 
 
+    // Clear Data from LocalStorage
+    const handleClear = () => {
+        const content = editor.getCurrentContent();
+
+        if (!content.hasText()) {
+            showAlert("There is no Data to clear", 'danger');
+            return;
+        }
+        localStorage.removeItem('sorcerer')
+        setEditor(EditorState.createEmpty());
+        showAlert("Data Cleared Success", 'success')
+    }
 
     return (
         <Fragment>
@@ -147,7 +159,10 @@ const DraftEditor = () => {
                 {/* Header component starts here */}
                 <div className='d-flex flex-row align-items-center justify-content-between mt-3 mb-3'>
                     <h1>My Editor</h1>
-                    <button className='btn btn-primary' onClick={handleSave}>Save</button>
+                    <div className='d-flex flex-row align-items-center'>
+                        <button className='btn btn-primary' onClick={handleSave}>Save</button>
+                        <button className='btn btn-success mx-2' onClick={handleClear}>Clear Data</button>
+                    </div>
                 </div>
                 {/* Header component ends here */}
 
